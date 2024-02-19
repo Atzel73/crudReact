@@ -33,6 +33,7 @@ const FormularioDeLibro = (props) => {
         cantidad,
         fecha: new Date()
       };
+      console.log(libro);
       props.handleOnSubmit(libro);
     } else {
       errorMsg = 'Por favor, rellene todos los campos.';
@@ -41,28 +42,28 @@ const FormularioDeLibro = (props) => {
   };
 
   const handleInputChange = (event) => {
-    const { nombre, valor } = event.target;
-    switch (nombre) {
+    const { name, value } = event.target;
+    switch (name) {
       case 'cantidad':
-        if (valor === '' || parseInt(valor) === +valor) {
+        if (value === '' || parseInt(value) === +value) {
           setLibro((prevState) => ({
             ...prevState,
-            [nombre]: valor
+            [name]: value
           }));
         }
         break;
       case 'precio':
-        if (valor === '' || valor.match(/^\d{1,}(\.\d{0,2})?$/)) {
+        if (value === '' || value.match(/^\d{1,}(\.\d{0,2})?$/)) {
           setLibro((prevState) => ({
             ...prevState,
-            [nombre]: valor
+            [name]: value
           }));
         }
         break;
       default:
         setLibro((prevState) => ({
           ...prevState,
-          [nombre]: valor
+          [name]: value
         }));
     }
   };

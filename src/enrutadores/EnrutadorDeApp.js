@@ -3,8 +3,11 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Header from '../componentes/Header';
 import AgregaLibro from '../componentes/AgregaLibro';
 import ListaDeLibros from '../componentes/ListaDeLibros';
+import usaAlmacenamientoLocal from '../hooks/usaAlmacenamientoLocal';
+
 
 const EnrutadorDeApp = () => {
+  const [libros, setLibros] = usaAlmacenamientoLocal('libros', []);
   return (
     <BrowserRouter>
       <div>
@@ -12,7 +15,12 @@ const EnrutadorDeApp = () => {
         <div className="main-content">
           <Switch>
             <Route component={ListaDeLibros} path="/" exact={true} />
-            <Route component={AgregaLibro} path="/add" />
+            <Route
+              render={(props) => (
+                <AgregaLibro {...props} libros={libros} setLibros={setLibros} />
+              )}
+              path="/add"
+            />
           </Switch>
         </div>
       </div>

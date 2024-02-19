@@ -1,9 +1,10 @@
 import React from 'react';
-import FormularioDeLibro from './FormularioDeLibro';
+import FormularioDeLibro from './FormularioDeLibro.js';
 
-const AgregaLibro = () => {
+const AgregaLibro = ({ history, libros, setLibros }) => {
   const handleOnSubmit = (libro) => {
-    console.log(libro);
+    setLibros([libro, ...libros]);
+    history.push('/');
   };
 
   return (
